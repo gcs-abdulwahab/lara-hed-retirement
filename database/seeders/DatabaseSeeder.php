@@ -6,6 +6,7 @@ namespace Database\Seeders;
 
 use App\Models\User;
 use Illuminate\Database\Seeder;
+use PHPUnit\Event\Test\TestStubCreated;
 
 class DatabaseSeeder extends Seeder
 {
@@ -16,6 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         // \App\Models\User::factory(10)->create();
 
+        User::truncate();
 
         User::factory()->create(
             [
@@ -26,7 +28,12 @@ class DatabaseSeeder extends Seeder
             ]
         );
 
+        // call CustomerSeeder
+        $this->call(CustomerSeeder::class);
 
+        $this->call(SubjectSeeder::class);
+
+        $this->call(EmployeeSeeder::class);
 
         // \App\Models\User::factory()->create([
         //     'name' => 'Test User',
